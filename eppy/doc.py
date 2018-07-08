@@ -428,7 +428,9 @@ class EppPollCommand(EppCommand):
     def __init__(self, op, msgID=None, extra_nsmap=None):
         pollattr = {"@op": op}
         if msgID is not None:
-            pollattr['@msgID'] = str(msgID)
+            # pollattr['@msgID'] = str(msgID)
+            # adapted by Liverun: use <poll op="ack" msgID="12345"/> instead of: <poll op="ack"><msgID>123456</msgID></poll>
+            pollattr = {"@op": op, "@msgID": msgID}
 
         dct = {
             'epp': {
